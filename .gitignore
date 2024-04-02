@@ -1,4 +1,5 @@
+*.csv
+.DS_Store
 review_data.zip
-review_data/
-dataset.csv
-sample_new.csv
+review_data
+ 
