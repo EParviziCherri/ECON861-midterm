@@ -9,8 +9,9 @@ import pandas as pd
 import csv
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.naive_bayes import MultinomialNB
-
+from sklearn.ensemble import RandomForestClassifier
 import dill as pickle
+import kfold_template
 
 
 review_stars = []
@@ -27,7 +28,7 @@ dataset = pd.DataFrame(data={"text": review_text, "stars": review_stars})
 
 #dataset = dataset.iloc[0:]
 
-dataset = dataset[(dataset['stars'] == '1') | (dataset['stars'] == '2')]
+dataset = dataset[(dataset['stars'] == '1') | (dataset['stars'] == '2') | (dataset['stars'] == '3')]
 
 print(dataset)
 
@@ -51,11 +52,16 @@ count_vectorize_transformer = CountVectorizer(analyzer=pre_processing).fit(data)
 
 data = count_vectorize_transformer.transform(data)
 
-machine = MultinomialNB()
+machine = RandomForestClassifier(criterion="gini", max_depth=10,n_estimators=11)
+#validation with kfold_template
+return_values=kfold_template.run_kfold(machine, data, target, 4, True)
+print(return_values)
+
+machine = RandomForestClassifier(criterion="gini", max_depth=10,n_estimators=11)
 machine.fit(data,target)
 
 
-with open("text_analysis_machine.pickle", "wb") as f:
+with open("text_analysis_machine_random_forest.pickle", "wb") as f:
   pickle.dump(machine, f)
   pickle.dump(count_vectorize_transformer, f)
   pickle.dump(lemmatizer, f)

@@ -1,7 +1,7 @@
 import pandas 
 import dill as pickle
 
-with open("text_analysis_machine.pickle", "rb") as f:
+with open("text_analysis_machine_naive_bayesian.pickle", "rb") as f:
     machine = pickle.load(f)
     count_vectorize_transformer = pickle.load(f)
     lemmatizer = pickle.load(f)
@@ -28,6 +28,7 @@ prediction_prob_dataframe = pandas.DataFrame(prediction_prob)
 prediction_prob_dataframe = prediction_prob_dataframe.rename(columns={
   prediction_prob_dataframe.columns[0]: "prediction_prob_1",
   prediction_prob_dataframe.columns[1]: "prediction_prob_2",
+  prediction_prob_dataframe.columns[2]: "prediction_prob_3"
   })
 
 
@@ -43,6 +44,7 @@ new_reviews = new_reviews.rename(columns={
 new_reviews['prediction'] = new_reviews['prediction'].astype(int)
 new_reviews['prediction_prob_1'] = round(new_reviews['prediction_prob_1'],4)
 new_reviews['prediction_prob_2'] = round(new_reviews['prediction_prob_2'],4)
+new_reviews['prediction_prob_3'] = round(new_reviews['prediction_prob_3'],4)
 
 
 new_reviews.to_csv("sample_new_with_stars.csv", index=False)
