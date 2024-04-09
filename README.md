@@ -13,8 +13,7 @@ Each of them includes:
 * private_files: Code for training models ( Naive Bayes and Random Forest) for programmer quality prediction based on review texts.
 * boss-files: Directory with prediction code using trained models to assess programmer quality with new review texts. I have saved the trained model (text_analysis_machine.pickle) for future use in predicting programmer quality based on review texts. Please utilize this pickle file in the boss-files directory for predictions.
 
-Model Training Overview:
-2. Trained Models:
+2. Model Training Overview:
 
 * Naive Bayesian (MultinomialNB):
 Overview: Utilizes Multinomial Naive Bayes classification for prediction.
